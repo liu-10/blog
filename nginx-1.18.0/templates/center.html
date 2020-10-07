@@ -1,0 +1,62 @@
+{% extends 'index.html' %}
+		
+		{% block title %}
+			<title>个人中心</title>
+		{% endblock%}
+
+		{% block link %}
+			<link rel="stylesheet" type="text/css" href="static/css/center.css">
+		{% endblock %}
+		
+		
+		{% block content%}
+		  <div class="banner-area" style="border: 1px solid #000; height: 1000px;">
+				<div class="info-list">
+					<ul>
+						<li class="li-cl"><a href="{{ url_for('user.center')}}" class="cur clearfix">个人中心</a> </li>
+						<li class="li-cl"><a href="{{ url_for('user.publish')}}" class="clearfix">发布文章</a></li>
+						<li class="li-cl"><a href="{{ url_for('user.photo')}}" class="clearfix">相册管理</a> </li>
+						<li class="li-cl"><a href="{{ url_for('user.message')}}" class="clearfix">管理留言</a> </li>
+						<li class="li-cl"><a href="{{ url_for('user.aboutme')}}" class="clearfix">关于个人</a> </li>
+					</ul>
+				</div>
+
+				<div class="info-content" style="border: 1px solid #000; position: absolute;">
+					<p style="position: absolute;left: 320px;top: 20px;color: lightblue;">{{ msg }}</p>
+					<form action="{{ url_for('user.center')}}" method="post" style="margin-top: 60px;" enctype="multipart/form-data">
+						<p style="margin-left: 200px">
+							<label style="font-weight: bold">用 户 名:</label>
+							<input type="text" name="username" style="width: 200px">
+						</p>
+						<p style="margin-left: 200px">
+							<label style="font-weight: bold">密&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;码:</label>
+							<input type="password" name="password" style="width: 200px">
+						</p>
+						<p style="margin-left: 200px">
+							<label style="font-weight: bold">确认密码:</label>
+							<input type="password" name="repassword" style="width: 200px">
+						</p>
+						<p style="margin-left: 200px">
+							<label style="font-weight: bold">邮&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;箱:</label>
+							<input type="text" name="email" style="width: 200px">
+						</p>
+						<p style="margin-left: 200px">
+							<label style="font-weight: bold">电&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;话:</label>
+							<input type="text" name="phone" style="width: 200px">
+						</p>
+						<p><input type="file" name="thum" style="margin-left: 200px"></p> 
+						{% if g.icon %}
+							<p style="margin-left: 300px"><img src="{{ g.icon }}" style="width: 100px;height: 100px;border-radius: 50%;"><span style="display: block;margin-left: 35px">头像</span></p> 
+						{% else %}
+							<p style="margin-left: 300px"><img src="/static/img/upload_icon/default.jpg" style="width: 100px;height: 100px;border-radius: 50%;"><span style="display: block;margin-left: 35px">头像</span></p>
+						{% endif %}
+						<input type="submit" style="margin-top: 15px; margin-left: 300px;width: 100px;" class="btn btn-primary">
+					</form>
+
+				</div>
+		  </div>
+		  {% endblock %}
+		{% block message%}
+		{% endblock %}
+
+		{% block js%}{% endblock %}

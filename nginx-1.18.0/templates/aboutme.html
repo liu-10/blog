@@ -1,0 +1,55 @@
+{% extends 'index.html' %}
+		{% block title %}
+		<title>关于我</title>
+		{% endblock %}
+		{% block link %}
+			<link rel="stylesheet" type="text/css" href="static/css/detail.css">
+		{% endblock %}
+		
+		
+		{% block content %}
+		  <div class="banner-area" style="border: 1px solid #000; height: 1000px;">
+				<div class="info-list">
+					<ul>
+						<li class="li-cl"><a href="{{ url_for('user.center')}}" class="clearfix">个人中心</a> </li>
+						<li class="li-cl"><a href="{{ url_for('user.publish')}}" class="clearfix">发布文章</a></li>
+						<li class="li-cl"><a href="{{ url_for('user.photo')}}" class="clearfix">相册管理</a> </li>
+						<li class="li-cl"><a href="{{ url_for('user.message')}}" class="clearfix">管理留言</a> </li>
+						<li class="li-cl"><a href="{{ url_for('user.aboutme')}}" class="cur clearfix">关于个人</a> </li>
+					</ul>
+				</div>
+
+				<div class="info-content" style="border: 1px solid #000; position: absolute;">
+					<p style="position: absolute;left: 305px;top: 20px;color: red;font-weight: 700;">{{ msg }}</p>
+					<form action="{{ url_for('user.aboutme')}}" method="post" style="margin-top: 60px;">
+						<p style="margin-left: 150px">
+	
+							<textarea name="content" style="width: 300px;height: 200px;" id="mytextarea"></textarea>
+						</p>
+						
+						<input type="submit" name="提交" style="margin-left: 250px;width: 100px;" class="btn btn-primary">
+					</form>
+
+				</div>
+		  </div>
+		  {% endblock %}
+
+		  {% block message%}{% endblock %}
+		  {% block js%}
+		  <script type="text/javascript" src="/static/tinymce/js/tinymce/tinymce.min.js"></script>
+		  <script type="text/javascript" src="/static/tinymce/js/tinymce/jquery.tinymce.min.js"></script>
+		  <script type="text/javascript">
+		  		$(function(){
+
+		  			tinymce.init({
+				         selector: '#mytextarea',
+				         plugins: 'advlist autolink link image lists preview quickbar',
+				         inline: false,
+				         width: 500,
+				         height: 400,
+
+				    });
+
+		  		})
+
+		  	</script>{% endblock %}

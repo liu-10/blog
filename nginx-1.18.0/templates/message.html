@@ -1,0 +1,73 @@
+{% extends 'index.html' %}
+		{% block title %}
+		<title>管理留言</title>
+		{% endblock %}
+		{% block link %}
+			<link rel="stylesheet" type="text/css" href="static/css/message.css">
+		{% endblock %}
+		
+		
+		{% block content %}
+		  <div class="banner-area" style="border: 1px solid #000; height: 1000px;">
+				<div class="info-list">
+					<ul>
+						<li class="li-cl"><a href="{{ url_for('user.center')}}" class="clearfix">个人中心</a> </li>
+						<li class="li-cl"><a href="{{ url_for('user.publish')}}" class="clearfix">发布文章</a></li>
+						<li class="li-cl"><a href="{{ url_for('user.photo')}}" class="clearfix">相册管理</a> </li>
+						<li class="li-cl"><a href="{{ url_for('user.message')}}" class="cur clearfix">管理留言</a> </li>
+						<li class="li-cl"><a href="{{ url_for('user.aboutme')}}" class="clearfix">关于个人</a> </li>
+					</ul>
+				</div>
+
+				<div class="info-content" style="border: 1px solid #000; position: absolute;">
+					<p style="position: absolute;left: 305px;top: 20px;color: red;font-weight: 700;">{{ msg }}</p>
+
+						<p style="margin-left: 150px">
+							<p style="margin-top: 50px;margin-left: 50px;">共{{ g.m_n }}条</p>
+							<table cellpadding="1" border="2" cellspacing="2" style="margin-left: 50px;">
+							   {% if messages %}
+							    {% for message in messages %}
+								<tr>
+									<td width="30" height="20" style="text-align: center;line-height: 20px;font-weight: bold;">{{ message.id }}</td>
+									<td width="70" height="20" style="text-align: center;">{{ message.m_name }}</td>
+									<td width="500" height="20">{{ message.m_con }}</td>
+									<td width="50" height="20" style="text-align: center;line-height: 20px;">
+										<a href="javascript:;" class="del" m_id="{{ message.id }}">删除</a>
+									</td>
+								</tr>
+								{% endfor %}
+								{% else %}
+									<p style="margin-left: 300px;margin-top: 200px;font-size: 30px;">暂无留言</p>
+								{% endif %}
+							</table>
+
+						</p>
+				</div>
+		  </div>
+		  {% endblock %}
+
+		  {% block message%}{% endblock %}
+		  {% block js%}
+		  		<script type="text/javascript">
+		  			$(function(){
+
+		  				$('.del').click(function(){
+
+		  					let m_id = $(this).attr('m_id');
+
+		  					$.post('{{ url_for("user.message")}}', {'m_id':m_id}, function(data){
+
+		  							if(data.res=='2'){
+		  								alert(data.msg);
+		  								window.location.reload()
+		  							}
+		  							else{
+		  								alert(data.msg)
+		  							}
+
+		  					})
+
+		  				})
+		  			})
+		  		</script>
+		  {% endblock%}

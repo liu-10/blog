@@ -1,0 +1,24 @@
+{% extends 'index.html' %}
+		{% block title %}
+		<title>留言</title>
+		{% endblock %}
+		{% block link %}
+			<link rel="stylesheet" type="text/css" href="static/css/detail.css">
+		{% endblock %}
+		
+		
+		{% block content %}
+		  <div class="banner-area" style="border: 1px solid #000; height: 1000px;">
+				<form method="post" style="margin-top: 120px;margin-left: 150px;">
+					<p>{{msg}}</p>
+					<input type="hidden" name="m_name" value="{{ g.name }}">
+					<input type="hidden" name="user_id" value="{{ g.id }}">
+					<textarea name="leave" style="width: 400px;height: 150px;"></textarea><br>
+					<input type="submit" name="" value="留言"  class="btn btn-primary">
+				</form>
+		  </div>
+		  {% endblock %}
+
+		  {% block message%}{% endblock %}
+		  {% block js%}
+		  {% endblock %}

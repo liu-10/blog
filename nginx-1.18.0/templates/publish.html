@@ -1,0 +1,68 @@
+{% extends 'index.html' %}
+		{% block title %}
+		<title>发布文章</title>
+		{% endblock %}
+		{% block link %}
+			<link rel="stylesheet" type="text/css" href="static/css/publish.css">
+		{% endblock %}
+		
+		
+		{% block content %}
+		  <div class="banner-area" style="border: 1px solid #000; height: 1000px;">
+				<div class="info-list">
+					<ul>
+						<li class="li-cl"><a href="{{ url_for('user.center')}}" class="clearfix">个人中心</a> </li>
+						<li class="li-cl"><a href="{{ url_for('user.publish')}}" class="cur clearfix">发布文章</a></li>
+						<li class="li-cl"><a href="{{ url_for('user.photo')}}" class="clearfix">相册管理</a> </li>
+						<li class="li-cl"><a href="{{ url_for('user.message')}}" class="clearfix">管理留言</a> </li>
+						<li class="li-cl"><a href="{{ url_for('user.aboutme')}}" class="clearfix">关于个人</a> </li>
+					</ul>
+				</div>
+
+				<div class="info-content" style="border: 1px solid #000; position: absolute;">
+					<p style="position: absolute;left: 305px;top: 20px;color: red;font-weight: 700;">{{ msg }}</p>
+					<form action="{{ url_for('user.publish')}}" method="post" style="margin-top: 60px;">
+						<p style="margin-left: 150px">
+							<label style="font-weight: bold">标题:</label>
+							<input type="text" name="title" style="width: 300px;margin-left: 20px">
+						</p>
+						<p style="margin-left: 150px">
+							<label style="font-weight: bold">类型:</label>
+							<select style="width: 130px;margin-left: 20px; display: inline;" name="type">
+									<option>--请选择类型--</option>
+									{% for type in types %}
+										<option>{{ type.type }}</option>
+									{% endfor %}
+							</select>
+						</p>
+						<p style="margin-left: 200px">
+							<label style="font-weight: bold; position: absolute;left: 150px;">内容:</label>
+							<textarea name="content" style="width: 300px;height: 200px;" id="mytextarea"></textarea>
+						</p>
+						<input type="submit" name="提交" style="margin-left: 300px;width: 100px;" class="btn btn-primary">
+					</form>
+
+				</div>
+		  </div>
+		  {% endblock %}
+
+		  {% block message%}
+		  {% endblock %}
+
+		  {% block js%}
+		  	<script type="text/javascript" src="/static/tinymce/js/tinymce/tinymce.min.js"></script>
+		  	<script type="text/javascript" src="/static/tinymce/js/tinymce/jquery.tinymce.min.js"></script>
+		  	<script type="text/javascript">
+		  		$(function(){
+
+		  			tinymce.init({
+				         selector: '#mytextarea',
+				         plugins: 'advlist autolink link image lists preview quickbar',
+				         inline: false,
+
+				    });
+
+		  		})
+
+		  	</script>
+		  {% endblock %}

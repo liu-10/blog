@@ -1,0 +1,73 @@
+{% extends 'index.html' %}
+		{% block title %}
+		<title>相册展示</title>
+		{% endblock %}
+		{% block link %}
+			<link rel="stylesheet" type="text/css" href="static/css/photo.css">
+		
+			<script src="static/js/vendor/jquery-2.2.4.min.js"></script>
+			<script src="static/js/popper.min.js"></script>
+			<script src="static/js/vendor/bootstrap.min.js"></script>
+			<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBhOdIF3Y9382fqJYt5I_sswSrEw5eihAA"></script>			
+  			<script src="static/js/easing.min.js"></script>
+			<script src="static/js/hoverIntent.js"></script>
+			<script src="static/js/superfish.min.js"></script>
+			<script src="static/js/jquery.ajaxchimp.min.js"></script>
+			<script src="static/js/jquery.magnific-popup.min.js"></script>
+    		<script src="static/js/jquery.tabs.min.js"></script>
+			<script src="static/js/jquery.nice-select.min.js"></script>
+            <script src="static/js/isotope.pkgd.min.js"></script>
+			<script src="static/js/waypoints.min.js"></script>
+			<script src="static/js/jquery.counterup.min.js"></script>
+			<script src="static/js/simple-skillbar.js"></script>
+			<script src="static/js/owl.carousel.min.js"></script>
+			<script src="static/js/mail-script.js"></script>
+			<script src="static/js/main.js"></script>
+		{% endblock %}
+		
+		
+		{% block content %}
+		  <div class="banner-area" style="border: 1px solid #000; height: 1000px;">
+				<p style="margin-top: 135px;font-size: 30px;font-weight: bold;margin-left: 200px;">收藏中心</p>
+					<ul style="margin-left: 200px;margin-top: 40px;width: 1000px;">
+						{% if collects %}
+						{% for collect in collects %}
+						<li style="margin-top: 30px;margin-left: 30px;"><a href="{{ url_for('article.detail')}}?a_id={{ collect.id}}" style="font-size: 25px;color: lightgreen">>>>{{ collect.t_name }}</a>
+							<a href="javascript:;" style="float: right;" class="cannel" c_id="{{ collect.id }}">取消收藏</a></li>
+						<hr style="background-color: black;height: 2px;">
+						{% endfor %}
+						{% else %}
+							<p>暂无收藏记录</p>
+						{% endif %}
+					</ul>
+		  </div>
+		  {% endblock %}
+
+		  {% block message%}
+		  {% endblock %}
+
+		  {% block ext%}
+		  {% endblock %}
+
+		  {% block js%}
+		  <script type="text/javascript">
+		  	$(function(){
+
+		  		$('.cannel').click(function(){
+
+		  				let c_id = $(this).attr('c_id');
+
+		  				$.post('{{ url_for("user.show_collect")}}', {'c_id':c_id}, function(data){
+
+		  					if(data.res=='2'){
+		  						alert(data.msg);
+		  						window.location.reload();
+		  					}
+		  					else{
+		  						alert(data.msg)
+		  					}
+		  				})
+		  		})
+		  	})
+		  </script>
+		  {% endblock %}

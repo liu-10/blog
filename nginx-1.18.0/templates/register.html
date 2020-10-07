@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>注册</title>
+    <link rel="stylesheet" type="text/css" href="/static/css/bootstrap.css">
+    <link rel="stylesheet" type="text/css" href="/static/css/register.css">
+    <script type="text/javascript" src="/static/js/jquery-1.12.4.min.js"></script>
+    <script type="text/javascript" src="/static/js/bootstrap.min.js"></script>
+</head>
+<body>
+    <form action="{{ url_for('user.register')}}" method="post" class="form_container">
+      {{ msg }}
+      <div class="form_group">
+        <label>用&nbsp;&nbsp;户&nbsp;&nbsp;名:</label>
+        <input type="text" class="inp" placeholder="请输入用户名" name="username">
+      </div>
+      <div class="form_group">
+        <label>密&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;码:</label>
+        <input type="password"  class="inp" placeholder="请输入密码" name="password">
+      </div>
+       <div class="form_group">
+        <label>确认密码:</label>
+        <input type="password"  class="inp" placeholder="请输入密码" name="repassword">
+      </div>
+      <div class="form_group">
+        <label>电话号码:</label>
+        <input type="text"  class="inp" placeholder="请输入号码" name="phone">
+      </div>
+      <div class="form_group">
+        <label>邮&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;箱:</label>
+        <input type="text"  class="inp" placeholder="请输入邮箱" name="email">
+      </div>
+      <button type="submit" class="btn btn-primary butt">注册</button>
+      <a href="{{ url_for('user.login')}}" class="login">登录>></a>
+    </form>
+</body>
+</html>

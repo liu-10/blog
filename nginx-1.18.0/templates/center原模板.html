@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+	<html lang="zxx" class="no-js">
+	<head>
+		<!-- Mobile Specific Meta -->
+		<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+		<!-- Favicon-->
+		<link rel="shortcut icon" href="img/fav.png">
+		<!-- Author Meta -->
+		<meta name="author" content="colorlib">
+		<!-- Meta Description -->
+		<meta name="description" content="">
+		<!-- Meta Keyword -->
+		<meta name="keywords" content="">
+		<!-- meta character set -->
+		<meta charset="UTF-8">
+		<!-- Site Title -->
+		<title>个人博客</title>
+
+		<link href="https://fonts.googleapis.com/css?family=Poppins:100,200,400,300,500,600,700" rel="stylesheet"> 
+			<!--
+			CSS
+			============================================= -->
+			<link rel="stylesheet" href="static/css/linearicons.css">
+			<link rel="stylesheet" href="static/css/font-awesome.min.css">
+			<link rel="stylesheet" href="static/css/bootstrap.css">
+			<link rel="stylesheet" href="static/css/magnific-popup.css">
+			<link rel="stylesheet" href="static/css/jquery-ui.css">
+			<link rel="stylesheet" href="static/css/nice-select.css">
+			<link rel="stylesheet" href="static/css/animate.min.css">
+			<link rel="stylesheet" href="static/css/owl.carousel.css">
+			<link rel="stylesheet" href="static/css/main.css">
+			<link rel="stylesheet" type="text/css" href="static/css/center.css">
+		</head>
+		<body>	
+		  <header id="header">
+		    <div class="container main-menu">
+		    	<div class="row align-items-center justify-content-between d-flex">
+			      <div id="logo" style="font-size: 20px;font-weight:bold">个人博客</a>
+			      </div>
+			      <nav id="nav-menu-container">
+			        <ul class="nav-menu">
+			          <li><a href="{{ url_for('user.index')}}">主页</a></li>
+			          <li><a href="#">关于我</a></li>
+			          <li class="menu-has-children"><a href="javascript:;">文章分类</a>
+			            <ul>
+			              <li><a href="#">随笔</a></li>
+			              <li><a href="#">生活</a></li>
+			              <li><a href="#">程序人生</a></li>
+			            </ul>
+			          </li>	
+			          <li><a href="#">相册</a></li>
+			          <li><a href="#">留言</a></li> 			          				
+			        </ul>
+			      </nav><!-- #nav-menu-container -->
+			      <div style="display: none;">
+			     	  <li class="nav_out"><a href="{{ url_for('user.login')}}">登录</a></li>	
+			          <li class="nav_out"><a href="{{ url_for('user.register')}}">注册</a></li>	
+			      </div>   	
+			      <div>
+			      		<div class="row">
+		                     <div class="dropdown">  
+		                         <div class="btn btn-default dropdown-toggle" data-toggle="dropdown">
+		                              <img src="/static/img/thum.jpg" style="height: 25px;width: 25px;border-radius: 50%;">
+		                              hi! <span>xxxx</span> 
+		                              <span class="caret"></span>       <!-- 这是向下的小箭头 -->
+		                         </div>
+
+		                         <ul class="dropdown-menu">
+		                              <li style="margin-left: 40px;"><a href="#">个人中心</a> </li>
+								      <li style="margin-left: 55px;"><a href="#">退出</a> </li>
+		                         </ul>
+		                     </div>
+                		 </div>
+			      </div>		    		
+		    	</div>
+		    </div>
+		  </header><!-- #header -->
+
+		  <div class="banner-area" style="border: 1px solid #000; height: 1000px;">
+				<div class="info-list">
+					<ul>
+						<li class="li-cl"><a href="{{ url_for('user.center')}}" class="cur clearfix">个人中心</a> </li>
+						<li class="li-cl"><a href="{{ url_for('user.publish')}}" class="clearfix">发布文章</a></li>
+					</ul>
+				</div>
+
+				<div class="info-content" style="border: 1px solid #000; position: absolute;">
+					<form action="#" method="post" style="margin-top: 60px;">
+						<p style="margin-left: 200px">
+							<label style="font-weight: bold">用 户 名:</label>
+							<input type="text" name="username" style="width: 200px">
+						</p>
+						<p style="margin-left: 200px">
+							<label style="font-weight: bold">密&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;码:</label>
+							<input type="password" name="password" style="width: 200px">
+						</p>
+						<p style="margin-left: 200px">
+							<label style="font-weight: bold">确认密码:</label>
+							<input type="password" name="repassword" style="width: 200px">
+						</p>
+						<p style="margin-left: 200px">
+							<label style="font-weight: bold">邮&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;箱:</label>
+							<input type="text" name="email" style="width: 200px">
+						</p>
+						<p style="margin-left: 200px">
+							<label style="font-weight: bold">电&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;话:</label>
+							<input type="text" name="phone" style="width: 200px">
+						</p>
+						<p><input type="file" name="thum" style="margin-left: 200px"></p> 
+						<p style="margin-left: 300px"><img src="static/img/default.jpg" style="width: 100px;height: 100px;"><span style="display: block;margin-left: 35px">头像</span></p> 
+
+						<input type="submit" name="提交" style="margin-top: 15px; margin-left: 300px;width: 100px;" class="btn btn-primary">
+					</form>
+
+				</div>
+		  </div>
+
+		  <script src="static/js/vendor/jquery-2.2.4.min.js"></script>
+			<script src="static/js/popper.min.js"></script>
+			<script src="static/js/vendor/bootstrap.min.js"></script>
+			<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBhOdIF3Y9382fqJYt5I_sswSrEw5eihAA"></script>			
+  			<script src="static/js/easing.min.js"></script>
+			<script src="static/js/hoverIntent.js"></script>
+			<script src="static/js/superfish.min.js"></script>
+			<script src="static/js/jquery.ajaxchimp.min.js"></script>
+			<script src="static/js/jquery.magnific-popup.min.js"></script>
+    		<script src="static/js/jquery.tabs.min.js"></script>
+			<script src="static/js/jquery.nice-select.min.js"></script>
+            <script src="static/js/isotope.pkgd.min.js"></script>
+			<script src="static/js/waypoints.min.js"></script>
+			<script src="static/js/jquery.counterup.min.js"></script>
+			<script src="static/js/simple-skillbar.js"></script>
+			<script src="static/js/owl.carousel.min.js"></script>
+			<script src="static/js/mail-script.js"></script>
+			<script src="static/js/main.js"></script>
+</body>
+</html>

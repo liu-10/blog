@@ -1,0 +1,69 @@
+{% extends 'index.html' %}
+		{% block title %}
+		<title>相册管理</title>
+		{% endblock %}
+		{% block link %}
+			<link rel="stylesheet" type="text/css" href="static/css/photo.css">
+		{% endblock %}
+		
+		
+		{% block content %}
+		  <div class="banner-area" style="border: 1px solid #000; height: 1000px;">
+				<div class="info-list">
+					<ul>
+						<li class="li-cl"><a href="{{ url_for('user.center')}}" class="clearfix">个人中心</a> </li>
+						<li class="li-cl"><a href="{{ url_for('user.publish')}}" class="clearfix">发布文章</a></li>
+						<li class="li-cl"><a href="{{ url_for('user.photo')}}" class="cur clearfix">相册管理</a> </li>
+						<li class="li-cl"><a href="{{ url_for('user.message')}}" class="clearfix">管理留言</a> </li>
+						<li class="li-cl"><a href="{{ url_for('user.aboutme')}}" class="clearfix">关于个人</a> </li>
+					</ul>
+				</div>
+
+				<div class="info-content" style="border: 1px solid #000; position: absolute;">
+					<p style="position: absolute;left: 305px;top: 20px;color: red;font-weight: 700;">{{ msg }}</p>
+					<form action="{{ url_for('user.photo')}}" method="post" style="margin-top: 60px;" enctype="multipart/form-data"> 
+						<input type="hidden" name="tar" value="0">
+						<p style="margin-left: 150px">
+							<input type="file" name="photo" style="display: inline-block;">
+							<input type="submit" name="提交" style="margin-left: 0px;width: 100px;" class="btn btn-primary">
+						</p>
+					</form>
+					<div style="margin-left: 100px;margin-top: 40px;">
+						<ul style="width: 500px;">
+							{% for photo in photos %}
+							<li style="list-style: none; display: inline-block; float: left;float: left;width: 100px;height: 100px;margin: 20px 0 0 20px;"><img src="{{ photo.name }}" style="width: 100px;height: 100px;">
+								<a href="javascript:;" style="margin-top: 30px; margin-left: 40px;" class="del" photo_id="{{ photo.id }}">删除</a>
+							</li>
+							{% endfor %}
+							
+						</ul>
+					</div>
+
+				</div>
+		  </div>
+		  {% endblock %}
+
+		  {% block message%}
+		  {% endblock %}
+
+		  {% block js%}
+		  	<script type="text/javascript">
+		  		$(function(){
+		  			$('.del').click(function(){
+		  				let pid = $(this).attr('photo_id');
+		  				// alert(pid);
+
+		  				$.post("{{ url_for('user.photo')}}", {'pid': pid, 'tar': '1'}, function(data){
+
+		  						if(data.res=='1'){
+		  							alert('修改成功');
+		  							location.reload();
+		  						}
+		  						// else{
+		  						// 	alert(data.msg);
+		  						// }
+		  				})
+		  			})
+		  		})
+		  	</script>
+		  {% endblock %}
