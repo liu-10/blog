@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>登录</title>
+    <link rel="stylesheet" type="text/css" href="/static/css/bootstrap.css">
+    <link rel="stylesheet" type="text/css" href="/static/css/login.css">
+    <script type="text/javascript" src="/static/js/jquery-1.12.4.min.js"></script>
+    <script type="text/javascript" src="/static/js/bootstrap.min.js"></script>
+    <script type="text/javascript">
+      $(function(){
+
+          $('.la').click(function(){
+             var tar =  $(this).html();
+
+             // alert(tar);
+
+             if(tar == '手机验证登录'){
+                $('.form_container').css({'display':'none'});
+                $(this).siblings().css({'color':'black'});
+                $('.form_container1').css({'display':'block'});
+                $(this).css({'color':'red'});
+
+             }
+             else{
+                $('.form_container1').css({'display':'none'});
+                $(this).siblings().css({'color':'black'});
+                $('.form_container').css({'display':'block'});
+                $(this).css({'color':'red'});
+             }
+          })
+
+      })
+    </script>
+</head>
+<body style="bg-success">
+    <div class="la_container">
+        <a href="javascript:;" class="la" style="color: red">用户名·密码</a>
+        <span>/</span>
+        <a href="javascript:;" class="la">手机验证登录</a>
+    </div>
+    <p style="position: absolute;top: 215px;left: 48%;color: red;">{{ msg }}</p> 
+    <form action="{{ url_for('user.login')}}" method="post" class="form_container" style="display: block;">
+      <div class="u-p">
+        <div class="form_group">
+          <label>用&nbsp;&nbsp;户&nbsp;&nbsp;名:</label>
+          <input type="text" class="inp" placeholder="请输入用户名" name="username">
+        </div>
+        <div class="form_group">
+          <label>密&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;码:</label>
+          <input type="password"  class="inp" placeholder="请输入密码" name="password">
+        </div>
+      </div>
+      <button type="submit" class="btn btn-primary butt">登录</button>
+      <a href="{{ url_for('user.register')}}" class="login">注册>></a>
+    </form>
+
+    <form action="{{ url_for('user.phone')}}" method="post" class="form_container1" style="display: none;">
+      <div class="message">
+          <div class="form_group">
+            <label>电话号码:</label>
+            <input type="text" class="inp" placeholder="请输入号码" name="phone">
+          </div>
+          <div class="form_group">
+            <label>验 证 码:</label>
+            <input type="text"  class="inp1" placeholder="请输入密码" name="verify">
+            <input type="button" class="btn btn-default" value="发送验证码" style="border: 1px solid #000;margin-left: 10px;">
+          </div>
+      </div>  
+      <button type="submit" class="btn btn-primary butt">登录</button>
+      <a href="{{ url_for('user.register')}}" class="login">注册>></a>
+    </form>
+</body>
+</html>

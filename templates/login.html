@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+	<meta charset="utf-8">
+	<!-- 移动端必有的 -->
+	<meta name="viewport" content="width=device-width,user-scalable=no,
+	initial-scale=1.0,maximum-scale=1.0,minimum-scale=1.0">
+	<title>登录</title>
+	<link rel="stylesheet" type="text/css" href="../static/css/bootstrap.min.css">
+	<script type="text/javascript" src="../static/js/jquery-1.12.4.min.js"></script>
+	<script type="text/javascript" src="../static/js/bootstrap.min.js"></script>
+    <script type="text/javascript">
+      $(function(){
+
+          $('.la').click(function(){
+             var tar =  $(this).html();
+
+             alert(tar);
+
+             if(tar == '手机号码'){
+                $('.form_container').css({'display':'none'});
+                $('.pa').css({'color':'black'});
+                // $(this).siblings().addClass('hi');
+                $('.form_container1').css({'display':'block'});
+                $('.phone').css({'color':'red'});
+                // $(this).addClass('cur');
+                
+
+             }
+             else{
+                $('.form_container1').css({'display':'none'});
+                $('.phone').css({'color':'black'});
+                // $(this).siblings().addClass('cur');
+                $('.form_container').css({'display':'block'});
+                $('.pa').css({'color':'red'});
+                // $(this).addClass('hi');
+             }
+          })
+
+      })
+    </script>
+
+    <style type="text/css">
+        .cur{
+            color: red;
+        }
+
+        .hi{
+            color: black;
+        }
+    </style>
+</head>
+<body>
+
+         <div class="container header-line" style="margin-top: 80px;margin-left: 30px;">
+            <div class="row header">
+                <p style="margin-left: 20px;font-size: 25px;float: left;"><a href="javascript:;" class="la pa" style="color: red;">账号</a></p>
+                <p style="float: left;margin-left: 20px;font-size: 25px;">/</p>
+                <p style="margin-left: 20px;font-size: 25px;float: left;"><a href="javascript:;" class="la phone">手机号码</a></p>
+                <p style="margin-left: 55px;font-size: 16px;float: left;line-height: 40px;"><a href="register.html">注册 ></a></p>
+            </div>
+         </div>
+
+         <form class="form_container" method="post" action="{{url_for('user.login')}}" style="margin-left: 40px;">
+             <p style="margin-top: 30px;">
+                 <label>用 户 名：</label>
+                 <input type="text" name="username" placeholder="请输入用户名">
+             </p>
+             <p style="margin-top: 30px;">
+                 <label>密&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;码：</label>
+                 <input type="password" name="password" placeholder="请输入密码">
+             </p>
+             <p style="margin-top: 40px;margin-left: 50px;">
+                 <input type="submit" name="" value="登录" style="width: 150px;height: 30px;">
+             </p>
+         </form>
+
+         <form class="form_container1" method="post" action="{{url_for('user.login')}}" style="margin-left: 40px;display: none;">
+             <p style="margin-top: 30px;">
+                 <label>号&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;码：</label>
+                 <input type="text" name="username" placeholder="请输入号码"> 
+             </p>
+             <p style="margin-top: 30px;">
+                <label>验 证 码:</label>
+                <input type="text" placeholder="请输入验证码" name="verify" style="width: 100px;">
+                <input type="button" class="btn btn-default" value="发送验证码" style="border: 1px solid #000;margin-left: 10px;background-color: lightblue;width: 80px;padding:5px 5px;">
+             </p>
+             <p style="margin-top: 40px;margin-left: 50px;">
+                 <input type="submit" name="" value="登录" style="width: 150px;height: 30px;">
+             </p>
+         </form>
+</body>
+</html>
+
+
+

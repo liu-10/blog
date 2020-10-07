@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+	<meta charset="utf-8">
+	<!-- 移动端必有的 -->
+	<meta name="viewport" content="width=device-width,user-scalable=no,
+	initial-scale=1.0,maximum-scale=1.0,minimum-scale=1.0">
+	<title>首页</title>
+	<link rel="stylesheet" type="text/css" href="../static/css/bootstrap.min.css">
+	<link rel="stylesheet" type="text/css" href="../static/css/index.css">
+	<script type="text/javascript" src="../static/js/jquery-1.12.4.min.js"></script>
+	<script type="text/javascript" src="../static/js/bootstrap.min.js"></script>
+<!--     <script type="text/javascript" src="../static/js/jquery-1.12.4.min.js"></script> -->
+
+    <script type="text/javascript">
+        $(function(){
+
+            var $box = $('.navbar')
+            var $top = $('.top')
+
+            //悬浮菜单
+            $(window).scroll(function(){
+
+                        var iNum = $(document).scrollTop();
+
+                        // $con.css({})
+                        // alert(iNum);
+                        // document.title = iNum;
+                        if(iNum > 200){
+                            // $box.css({
+                            //     'position':'fixed',
+                            //     'left':0,
+                            //     'top':0,
+                            // })
+
+                            $top.css({'display': 'block'});
+                        }
+                        else{
+                            // $box.css({
+                            //     'position':'static',
+                            //     'marginLeft':'auto'
+
+                            // });
+
+                            $top.css({'display': 'none'});
+                        }
+                        
+            })
+
+            //返回顶部
+            $top.click(function(){
+
+
+                        $('html,body').animate({'scrollTop':0});            
+                        
+            })
+
+            flag = false;
+
+            $('#search').click(function(){
+                if(flag == false){
+                    $('#go').show();
+                    flag = true;
+                }
+                else{
+                    $('#go').hide();
+                    flag = false;
+                }
+            })
+
+            $('#all').click(function(){
+                scrollTo(0,window.innerHeight);
+            })
+        })
+    </script>
+
+</head>
+<body>
+		<!-- 导航条 -->
+          <div class="navbar navbar-inverse navbar-static-top" style="margin-bottom: 0px;">
+          		<div class="container">
+          			 <div class="navbar-header">
+
+          			 	<button class="navbar-toggle" data-toggle="collapse" data-target="#menu" style="border: 1px solid #fff;">
+							{% if g.name %}
+								<span style="color: white">欢迎！{{ g.name }}</span>
+							{% else %}
+								<span class="icon_bar" style="color: #fff;">登录</span>
+								<span class="icon_bar" style="color: #fff;">注册</span>
+							{% endif %}
+          			 	</button>
+
+
+          			 	<a href="/" class="navbar-brand" style="font-size: 25px;">看吧</a>
+                         <span class="navbar-brand" style="color: #fff;font-size: 15px;" id="search">搜索</span>
+          			 </div>
+
+                     <form class="navbar-form  navbar-right" style="display: none;" id="go">
+                                <div class="form-group">
+                                    <div class="input-group">
+                                        <input type="text" name="" class="form-control">
+                                        <span class="input-group-btn">
+                                            <button class="btn btn-default" type="botton">Go<!-- <span class="glyphicon glyphicon-search"> --></span></button>
+                                        </span>
+                                    </div>
+                                </div>
+                    </form>
+
+          			 <div {% if g.name %}class="collapse navbar-collapse"{% else %} style="display: none"{% endif %} id='menu'>
+
+	          			 <ul class="nav navbar-nav">
+	          			 	<li><a href="{{ url_for('user.cen')}}">个人中心</a></li>
+                            <li><a href="{{ url_for('user.photo')}}">我的相册</a></li>
+                            <li><a href="{{ url_for('user.publish')}}">发布文章</a></li>
+                            <li><a href="{{ url_for('user.collect')}}">收藏</a></li>
+	          			 </ul>
+
+                         
+	          		  </div>
+          		</div>
+          </div>
+
+
+        <!-- 巨幕 -->
+         <div class="jumbotron">
+         	<div class="container">
+         		<div class="row">
+	         		<div class="block_info col-lg-5 col-lg-offset-1 col-md-5 col-md-offset-1">
+	         			<img src="../static/images/logo.jpg" alt="background"  class="img-responsive" style="width: 100%;height: 200px;">
+	         		</div>
+	         	</div>
+         	</div>
+         </div>
+
+         <div class="top" style="display: none;">个</div>
+
+         <div class="container header-line">
+            <div class="row header">
+                <p style="margin-left: 20px;font-size: 25px;">分类</p>
+            </div>
+         </div>
+
+         <div class="container">
+         	<div class="row row2">
+				<div class="col-lg-3 col-md-6" class="text-center">
+						<div class="thumbnail">
+							<img src="cat.png" style="display: inline-block;width: 50px;height: 50px;margin-right: 70px;">
+							<a href="{{ url_for('user.index')}}?" class="text-center" style="display: inline-block;font-size: 16px;">全部</a>
+						</div>
+         		    </div>
+				{% for type in types %}
+         			<div class="col-lg-3 col-md-6" class="text-center">
+						<div class="thumbnail">
+							<img src="cat.png" style="display: inline-block;width: 50px;height: 50px;margin-right: 70px;">
+							<a href="{{ url_for('user.index')}}?type={{ type.id }}&page=1" class="text-center" style="display: inline-block;font-size: 16px;">{{ type.type }}</a>
+						</div>
+         		    </div>
+				{% endfor %}
+         	</div>
+         </div>
+
+         <div class="container header-line">
+         	<div class="row header">
+         		<p style="margin-left: 20px;font-size: 25px;">{{ ptype }}</p>
+         	</div>
+         </div>
+         {% if paginates.items %}
+         <div class="container">
+         	<div class="row  goods_con">
+                {% for article in paginates.items %}
+             		<div class="col-lg-6">
+             			<div class='goods_list' style="background-color: #f1f1f1;">
+    	         			<p><a href="{{ url_for('article.detail')}}?a_id={{ article.id }}" style="font-size: 20px;">{{ article.t_name }}</a></p>
+    	         			<p>{{ article.comment | safe }}<a href="{{ url_for('article.detail')}}?a_id={{ article.id }}" style="text-decoration: underline;font-size: 20px;">....</a></p>
+                            <p><span style="font-size: 12px;padding-right: 15px;">发布时间:{{ article.publish_time }}</span><span style="font-size: 12px;padding-right: 15px;">作者:{{ article.users}}</span><span style="font-size: 12px;padding-right: 15px;">浏览量:{{ article.tread }}</span>
+                            </p>
+             		    </div>
+             	    </div>
+                {% endfor %}
+         	</div>
+         </div>
+
+         <nav aria-label="Page navigation" style="text-align: center;padding-bottom: 30px;">
+            <ul class="pagination">
+                <li {% if not paginates.has_prev %} class="disabled" {% endif %}>
+                      <a href="{{ url_for('user.index')}}?type={{ g.tid }}&page={{ paginates.prev_num }}&num=prev" aria-label="Previous" class="prev">
+                        <span aria-hidden="true">&laquo;</span>
+                      </a>
+                </li>
+                {% for page_num in range(1, paginates.pages + 1)%}
+                <li {% if paginates.page==page_num%} class="active" {% endif %}><a href="{{ url_for('user.index')}}?type={{ g.tid}}&page={{ page_num }}">{{ page_num }}</a></li>
+                {% endfor %}
+
+                <li {% if not paginates.has_next %} class="disabled" {% endif %}>
+                  <a href="{{ url_for('user.index')}}?type={{ g.tid }}&page={{ paginates.next_num }}&num=next&pages={{ paginates.pages }}" aria-label="Next" class="next">
+                    <span aria-hidden="true">&raquo;</span>
+                  </a>
+                </li>
+            </ul>
+         </nav>
+         {% else %}
+           <p style="text-align: center;padding-bottom: 50px;color: red;">暂无此类型文章T .T</p>
+         {% endif %}
+
+
+
+         <div class="navbar_top" style="font-size: 0px;">
+                      <p style="display: inline-block;border-top: 1px solid #000; width: 25%;font-size: 20px;text-align: center;" class="col-lg-3 col-md-3 col-sm-3"><a href="/">首页</a></p>
+                      <p style="display: inline-block;border-top: 1px solid #000; width: 25%;font-size: 20px;text-align: center;" class="col-lg-3 col-md-3 col-sm-3"><a href="{{ url_for('user.photo')}}">相册</a></p>
+                      <p style="display: inline-block;border-top: 1px solid #000; width: 25%;font-size: 20px;text-align: center;" class="col-lg-3 col-md-3 col-sm-3"><a href="{{ url_for('user.collect')}}">收藏</a></p>
+                      <p style="display: inline-block;border-top: 1px solid #000; width: 25%;font-size: 20px;text-align: center;" class="col-lg-3 col-md-3 col-sm-3"><a href="{{ url_for('user.cen')}}">我的</a></p>
+         </div>
+
+</body>
+</html>
+
+
+
